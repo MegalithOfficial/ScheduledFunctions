@@ -1,0 +1,27 @@
+{
+  "name": "scheduledfunctions",
+  "version": "0.0.1",
+  "description": "Simple scheduler module with Cron module.",
+  "main": "src/main.js",
+  "scripts": {
+    "test": "node test/index.js"
+  },
+  "keywords": [],
+  "author": "MegalithOffical",
+  "license": "SEE LICENSE IN LICENSE.md",
+  "dependencies": {
+    "node-cron": "^3.0.2"
+  },
+  "directories": {
+    "test": "test"  
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MegalithOffical/Scheduled-Functions.git"
+  },
+  "bugs": {
+    "url": "https://github.com/MegalithOffical/Scheduled-Functions/issues"
+  },
+  "homepage": "https://github.com/MegalithOffical/Scheduled-Functions#readme"
+}
