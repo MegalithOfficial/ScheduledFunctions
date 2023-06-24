@@ -1,11 +1,13 @@
 import cron from "node-cron";
+import KiwiEmitter from "@smootie/emitter";
 
-export class ScheduledFunctions {
+export class ScheduledFunctions extends KiwiEmitter {
 
   /**
    * Constructor code of ScheduledFunctions class.
    */
   constructor() {
+    super();
     /**
      * A map that stores the scheduled tasks.
      * @type {Map<string, cron.ScheduledTask>}
@@ -20,16 +22,20 @@ export class ScheduledFunctions {
    * @returns {cron.ScheduledTask}
    */
   schedule(opt, callback) {
+    this.emit("newSchedule", opt);
     const task = cron.schedule(opt.cronExpression, async () => {
+      console.log(opt.repeat)
       callback();
-      if (!opt.repeated) {
-        task.stop()
+      this.emit("ScheduleExecuted", opt);
+      if (opt.repeat !== true) {
+       task.stop()
       }
-    }, { scheduled: true, timezone: opt.timezone });
+      // TODO: ^^ this code is broken
+    }, { timezone: opt.timezone });
 
     this.tasks.set(opt.id, task)
     return task;
-  };
+  }; 
 
   /**
    * Gets the status of a scheduled task.
@@ -49,6 +55,7 @@ export class ScheduledFunctions {
     const task = (this.tasks.get(id) ?? null);
     if (!task) throw Error("Scheduled Task cannot be founded.")
     task.stop();
+    this.emit("ScheduleDeleted", task, id)
     return this.tasks.delete(id);
   }
 
@@ -61,6 +68,7 @@ export class ScheduledFunctions {
     const task = (this.tasks.get(id) ?? null);
     if (!task) throw Error("Scheduled Task cannot be founded.")
     task.stop();
+    this.emit("ScheduleStoped", task, id)
   }
 
   /**
@@ -72,6 +80,7 @@ export class ScheduledFunctions {
     const task = (this.tasks.get(id) ?? null);
     if (!task) throw Error("Scheduled Task cannot be founded.")
     task.start();
+    this.emit("ScheduleResumed", task, id)
   }
 
 };

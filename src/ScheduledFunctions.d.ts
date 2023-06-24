@@ -2,7 +2,7 @@ import cron from "node-cron";
 
 export interface SchedulerOptions {
   cronExpression: string;
-  repeated: boolean;
+  repeat: boolean;
   timezone: string;
   id: string;
 };

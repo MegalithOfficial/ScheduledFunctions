@@ -1,6 +1,7 @@
 {
   "name": "scheduledfunctions",
   "version": "0.0.1",
+  "type": "module",
   "description": "Simple scheduler module with Cron module.",
   "main": "src/main.js",
   "scripts": {
@@ -10,12 +11,12 @@
   "author": "MegalithOffical",
   "license": "SEE LICENSE IN LICENSE.md",
   "dependencies": {
+    "@smootie/emitter": "^1.6.1",
     "node-cron": "^3.0.2"
   },
   "directories": {
-    "test": "test"  
+    "test": "test"
   },
-  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/MegalithOffical/Scheduled-Functions.git"
